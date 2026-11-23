@@ -1,0 +1,347 @@
+{
+  "entities": {
+    "Property": {
+      "title": "Property",
+      "description": "A residential, plot, commercial, or agricultural property listing managed by Al Hashmi Real Estate Agency Sahiwal.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 160,
+          "description": "Listing headline in plain sentence case."
+        },
+        "slug": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 180,
+          "pattern": "^[a-z0-9-]+$",
+          "description": "URL-safe unique slug."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 4000,
+          "description": "Detailed property description."
+        },
+        "purpose": {
+          "type": "string",
+          "enum": ["sale", "rent"],
+          "description": "Transaction purpose."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "house",
+            "plot",
+            "apartment",
+            "shop",
+            "office",
+            "agricultural_land",
+            "commercial_building"
+          ],
+          "description": "Property category."
+        },
+        "pricePkr": {
+          "type": "number",
+          "description": "Price in Pakistani Rupees (PKR)."
+        },
+        "areaValue": {
+          "type": "number",
+          "description": "Numeric plot or floor area."
+        },
+        "areaUnit": {
+          "type": "string",
+          "enum": ["marla", "kanal", "sq_ft", "acre"],
+          "description": "Measurement unit."
+        },
+        "bedrooms": {
+          "type": "number",
+          "description": "Number of bedrooms."
+        },
+        "bathrooms": {
+          "type": "number",
+          "description": "Number of bathrooms."
+        },
+        "parking": {
+          "type": "number",
+          "description": "Car parking capacity."
+        },
+        "furnished": {
+          "type": "string",
+          "enum": ["unfurnished", "semi_furnished", "furnished"],
+          "description": "Furnishing status."
+        },
+        "yearBuilt": {
+          "type": "number",
+          "description": "Construction year if applicable."
+        },
+        "address": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 240,
+          "description": "Street or sector address."
+        },
+        "areaName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120,
+          "description": "Locality or town name."
+        },
+        "lat": {
+          "type": "number",
+          "description": "Optional latitude coordinate."
+        },
+        "lng": {
+          "type": "number",
+          "description": "Optional longitude coordinate."
+        },
+        "amenities": {
+          "type": "array",
+          "description": "Bounded list of up to 25 amenities."
+        },
+        "images": {
+          "type": "array",
+          "description": "Bounded list of up to 12 property image objects."
+        },
+        "coverImageUrl": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Primary display image URL."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["for_sale", "for_rent", "sold", "rented"],
+          "description": "Current listing availability status."
+        },
+        "featured": {
+          "type": "boolean",
+          "description": "Whether the property appears in the homepage featured section."
+        },
+        "isSample": {
+          "type": "boolean",
+          "description": "Marks placeholder sample properties for easy replacement."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server update timestamp."
+        }
+      },
+      "required": [
+        "title",
+        "slug",
+        "description",
+        "purpose",
+        "type",
+        "pricePkr",
+        "areaValue",
+        "areaUnit",
+        "bedrooms",
+        "bathrooms",
+        "parking",
+        "furnished",
+        "address",
+        "areaName",
+        "amenities",
+        "images",
+        "coverImageUrl",
+        "status",
+        "featured",
+        "isSample",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "GalleryImage": {
+      "title": "GalleryImage",
+      "description": "Curated gallery image optionally linked to a property listing.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Image path or URL."
+        },
+        "caption": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 240,
+          "description": "Descriptive caption and alt text."
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Houses", "Plots", "Commercial", "Projects"],
+          "description": "Filterable gallery category."
+        },
+        "propertyId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Optional linked property document ID."
+        },
+        "propertySlug": {
+          "type": "string",
+          "maxLength": 180,
+          "description": "Optional linked property slug."
+        },
+        "propertyTitle": {
+          "type": "string",
+          "maxLength": 160,
+          "description": "Optional linked property title."
+        },
+        "isSample": {
+          "type": "boolean",
+          "description": "Sample marker."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp."
+        }
+      },
+      "required": ["url", "caption", "category", "isSample", "createdAt"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Customer property or general inquiry submitted from the public site.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120,
+          "description": "Client full name."
+        },
+        "phone": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 30,
+          "description": "Client contact number."
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160,
+          "description": "Optional email address."
+        },
+        "message": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 2000,
+          "description": "Client inquiry message."
+        },
+        "propertyId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Attached property ID if submitted from a listing."
+        },
+        "propertyTitle": {
+          "type": "string",
+          "maxLength": 160,
+          "description": "Attached property title if submitted from a listing."
+        },
+        "sourcePage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "description": "Route where the inquiry originated."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["new", "contacted", "closed"],
+          "description": "Admin follow-up status."
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Private admin follow-up notes."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server update timestamp."
+        }
+      },
+      "required": ["name", "phone", "message", "sourcePage", "status", "createdAt", "updatedAt"]
+    },
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Editable agency profile, contact information, and hero copy.",
+      "type": "object",
+      "properties": {
+        "agencyName": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "phone": { "type": "string", "minLength": 7, "maxLength": 40 },
+        "whatsappNumber": { "type": "string", "minLength": 7, "maxLength": 40 },
+        "address": { "type": "string", "minLength": 5, "maxLength": 300 },
+        "email": { "type": "string", "maxLength": 160 },
+        "workingHours": { "type": "string", "maxLength": 160 },
+        "facebookUrl": { "type": "string", "maxLength": 300 },
+        "instagramUrl": { "type": "string", "maxLength": 300 },
+        "googleMapsUrl": { "type": "string", "maxLength": 300 },
+        "googleRating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "heroHeadline": { "type": "string", "minLength": 5, "maxLength": 160 },
+        "heroSubheadline": { "type": "string", "minLength": 5, "maxLength": 320 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "agencyName",
+        "phone",
+        "whatsappNumber",
+        "address",
+        "googleMapsUrl",
+        "googleRating",
+        "reviewCount",
+        "heroHeadline",
+        "heroSubheadline",
+        "updatedAt"
+      ]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Staff role profile for admin panel access control.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "email": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "role": { "type": "string", "enum": ["admin", "editor"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "displayName", "role", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/properties/{propertyId}": {
+      "schema": { "$ref": "#/entities/Property" },
+      "description": "Publicly readable property listings, writable only by verified admins and editors."
+    },
+    "/gallery_images/{imageId}": {
+      "schema": { "$ref": "#/entities/GalleryImage" },
+      "description": "Publicly readable gallery images, writable only by verified admins and editors."
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": { "$ref": "#/entities/Inquiry" },
+      "description": "Publicly creatable inquiries with PII strictly isolated to verified admins and editors."
+    },
+    "/site_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/SiteSettings" },
+      "description": "Publicly readable agency settings document ('default'), writable only by verified admins."
+    },
+    "/profiles/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Staff role assignments managed strictly by verified admins."
+    }
+  }
+}

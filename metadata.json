@@ -1,0 +1,6 @@
+{
+  "name": "Al Hashmi Real Estate Agency Sahiwal",
+  "description": "Dignified property advisory and real estate agency in Sahiwal and Ferozewala, Pakistan. Browse verified houses, plots, and commercial properties.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
